@@ -1,6 +1,6 @@
-# Solana Voting Program Development Challenge Tester
+# Solana Lending Program Development Challenge Tester
 
-This is a program that validates your progress on the "Solana Voting Program
+This is a program that validates your progress on the "Solana Lending Program
 Development" challenge.
 
 ## Requirements for binary
