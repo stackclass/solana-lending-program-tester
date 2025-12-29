@@ -12,5 +12,5 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub mod ir1;
 pub mod fl2;
+pub mod ir1;
