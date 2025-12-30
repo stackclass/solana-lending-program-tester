@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use tester::{CaseError, Harness};
+use crate::verifier::run_verification;
 
-pub fn test_init_user(_harness: &Harness) -> Result<(), CaseError> {
-    Ok(())
+pub fn test_init_user(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "iu5")
 }
