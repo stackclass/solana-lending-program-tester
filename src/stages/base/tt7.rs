@@ -14,6 +14,6 @@
 
 use crate::verifier::run_verification;
 
-pub fn test_repay(harness: &tester::Harness) -> Result<(), tester::CaseError> {
-    run_verification(harness, "rp9")
+pub fn test_basic_withdraw(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "tt7")
 }

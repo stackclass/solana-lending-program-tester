@@ -14,6 +14,18 @@
 
 use crate::verifier::run_verification;
 
-pub fn test_error_codes(harness: &tester::Harness) -> Result<(), tester::CaseError> {
-    run_verification(harness, "er11")
+pub fn test_liquidation_trigger(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "li2")
+}
+
+pub fn test_liquidation_process(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "li3")
+}
+
+pub fn test_liquidation_bonus(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "li4")
+}
+
+pub fn test_liquidation_practice(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "li5")
 }

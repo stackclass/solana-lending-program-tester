@@ -12,8 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::verifier::run_verification;
-
-pub fn test_flash_loans(harness: &tester::Harness) -> Result<(), tester::CaseError> {
-    run_verification(harness, "fl2")
-}
+pub mod pa1;
+pub mod pa2;
+pub mod pa3;
+pub mod pa4;

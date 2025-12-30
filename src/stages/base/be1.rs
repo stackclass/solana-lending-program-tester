@@ -12,5 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub mod base;
-pub mod extensions;
+use crate::verifier::run_verification;
+
+pub fn test_env_setup(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "be1")
+}

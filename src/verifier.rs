@@ -69,7 +69,7 @@ pub fn run_verification(
         }));
     }
 
-    let stdout = String::from_utf8_lossy(&output.stdout);
+    let stdout = String::from_utf8_lossy(&output.stdout).trim().to_string();
     let result: VerificationResult = serde_json::from_str(&stdout).map_err(|e| {
         Box::new(VerificationError { message: format!("Failed to parse JSON: {} - {}", e, stdout) })
     })?;

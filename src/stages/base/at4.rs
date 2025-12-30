@@ -14,6 +14,6 @@
 
 use crate::verifier::run_verification;
 
-pub fn test_withdraw(harness: &tester::Harness) -> Result<(), tester::CaseError> {
-    run_verification(harness, "wt7")
+pub fn test_anchor_try(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "at4")
 }

@@ -12,8 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::verifier::run_verification;
-
-pub fn test_user(harness: &tester::Harness) -> Result<(), tester::CaseError> {
-    run_verification(harness, "us3")
-}
+pub mod in1;
+pub mod in2;
+pub mod in3;
+pub mod in4;

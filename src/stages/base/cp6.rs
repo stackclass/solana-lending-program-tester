@@ -14,6 +14,6 @@
 
 use crate::verifier::run_verification;
 
-pub fn test_deposit(harness: &tester::Harness) -> Result<(), tester::CaseError> {
-    run_verification(harness, "dp6")
+pub fn test_basic_deposit(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "cp6")
 }

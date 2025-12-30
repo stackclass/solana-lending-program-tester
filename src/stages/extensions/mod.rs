@@ -12,5 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub mod base;
-pub mod extensions;
+pub mod account_structure;
+pub mod interest;
+pub mod lending_core;
+pub mod liquidation;
+pub mod oracle;
+pub mod pda;
+pub mod security;
+pub mod treasury;

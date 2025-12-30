@@ -12,5 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub mod base;
-pub mod extensions;
+use crate::verifier::run_verification;
+
+pub fn test_bank_account(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "as1")
+}
+
+pub fn test_user_account(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "as2")
+}
+
+pub fn test_account_space(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "as3")
+}
+
+pub fn test_account_practice(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "as4")
+}

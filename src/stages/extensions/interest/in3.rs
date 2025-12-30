@@ -14,6 +14,10 @@
 
 use crate::verifier::run_verification;
 
-pub fn test_init_bank(harness: &tester::Harness) -> Result<(), tester::CaseError> {
-    run_verification(harness, "ib4")
+pub fn test_rate_models(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "in3")
+}
+
+pub fn test_interest_practice(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "in4")
 }

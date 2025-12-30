@@ -12,5 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub mod fl2;
-pub mod ir1;
+use crate::verifier::run_verification;
+
+pub fn test_liquidation_process(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "li3")
+}
+
+pub fn test_liquidation_bonus(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "li4")
+}
+
+pub fn test_liquidation_practice(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "li5")
+}

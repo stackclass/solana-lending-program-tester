@@ -14,6 +14,14 @@
 
 use crate::verifier::run_verification;
 
-pub fn test_testing_deploy(harness: &tester::Harness) -> Result<(), tester::CaseError> {
-    run_verification(harness, "td13")
+pub fn test_pyth_integration(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "or2")
+}
+
+pub fn test_price_fetching(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "or3")
+}
+
+pub fn test_oracle_practice(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "or4")
 }

@@ -12,5 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub mod base;
-pub mod extensions;
+use crate::verifier::run_verification;
+
+pub fn test_interest_basics(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "in1")
+}
+
+pub fn test_accrued_interest(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "in2")
+}
+
+pub fn test_rate_models(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "in3")
+}
+
+pub fn test_interest_practice(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "in4")
+}

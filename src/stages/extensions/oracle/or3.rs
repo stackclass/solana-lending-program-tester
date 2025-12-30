@@ -14,6 +14,10 @@
 
 use crate::verifier::run_verification;
 
-pub fn test_interest_rate_model(harness: &tester::Harness) -> Result<(), tester::CaseError> {
-    run_verification(harness, "ir1")
+pub fn test_price_fetching(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "or3")
+}
+
+pub fn test_oracle_practice(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "or4")
 }

@@ -14,6 +14,14 @@
 
 use crate::verifier::run_verification;
 
-pub fn test_borrow(harness: &tester::Harness) -> Result<(), tester::CaseError> {
-    run_verification(harness, "br8")
+pub fn test_accrued_interest(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "in2")
+}
+
+pub fn test_rate_models(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "in3")
+}
+
+pub fn test_interest_practice(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "in4")
 }

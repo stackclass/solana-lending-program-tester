@@ -14,6 +14,6 @@
 
 use crate::verifier::run_verification;
 
-pub fn test_bank(harness: &tester::Harness) -> Result<(), tester::CaseError> {
-    run_verification(harness, "bs2")
+pub fn test_spl_token_basics(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "st5")
 }

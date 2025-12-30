@@ -14,6 +14,6 @@
 
 use crate::verifier::run_verification;
 
-pub fn test_init_user(harness: &tester::Harness) -> Result<(), tester::CaseError> {
-    run_verification(harness, "iu5")
+pub fn test_solana_model(harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    run_verification(harness, "sm3")
 }
