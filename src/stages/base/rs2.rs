@@ -12,8 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::verifier::run_verification;
+use crate::verifier::get_program_info;
 
-pub fn test_rust_basics(harness: &tester::Harness) -> Result<(), tester::CaseError> {
-    run_verification(harness, "rs2")
+pub fn test_rust_basics(_harness: &tester::Harness) -> Result<(), tester::CaseError> {
+    let info = get_program_info()?;
+
+    if !info.instructions.is_empty() || !info.accounts.is_empty() || !info.structs.is_empty() {
+        Ok(())
+    } else {
+        Err(Box::new(std::io::Error::other("Rust code not found".to_string())))
+    }
 }

@@ -19,12 +19,50 @@ use std::{
     process::{Command, Stdio},
 };
 
-#[derive(Debug, Deserialize, Serialize)]
-pub struct VerificationResult {
-    pub success: bool,
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct ProgramInfo {
+    pub program_id: String,
+    pub instructions: Vec<InstructionInfo>,
+    pub accounts: Vec<AccountInfo>,
+    pub errors: Vec<ErrorInfo>,
+    pub structs: Vec<StructInfo>,
+}
+
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct InstructionInfo {
+    pub name: String,
+    pub arguments: Vec<ArgumentInfo>,
+}
+
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct ArgumentInfo {
+    pub name: String,
+    pub type_name: String,
+}
+
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct AccountInfo {
+    pub name: String,
+    pub fields: Vec<FieldInfo>,
+}
+
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct FieldInfo {
+    pub name: String,
+    pub type_name: String,
+}
+
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct ErrorInfo {
+    pub name: String,
+    pub code: u32,
     pub message: String,
-    #[serde(default)]
-    pub details: serde_json::Value,
+}
+
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct StructInfo {
+    pub name: String,
+    pub fields: Vec<FieldInfo>,
 }
 
 #[derive(Debug)]
@@ -40,18 +78,16 @@ impl fmt::Display for VerificationError {
 
 impl std::error::Error for VerificationError {}
 
-pub fn run_verification(
-    _harness: &tester::Harness,
-    stage_id: &str,
-) -> Result<(), tester::CaseError> {
+pub fn get_program_info() -> Result<ProgramInfo, tester::CaseError> {
     let repository_dir = std::env::var("STACKCLASS_REPOSITORY_DIR").map_err(|_| {
         Box::new(VerificationError { message: "STACKCLASS_REPOSITORY_DIR not set".to_string() })
     })?;
 
     let executable_path = PathBuf::from(&repository_dir).join("your_program.sh");
 
+    // 运行 dump_info 命令
     let mut cmd = Command::new(&executable_path);
-    cmd.arg("--check").arg(stage_id);
+    cmd.arg("dump_info");
 
     let output = cmd
         .stdin(Stdio::null())
@@ -59,24 +95,20 @@ pub fn run_verification(
         .stderr(Stdio::piped())
         .output()
         .map_err(|e| {
-            Box::new(VerificationError { message: format!("Failed to run verification: {}", e) })
+            Box::new(VerificationError { message: format!("Failed to get program info: {}", e) })
         })?;
 
     if !output.status.success() {
         let stderr = String::from_utf8_lossy(&output.stderr);
         return Err(Box::new(VerificationError {
-            message: format!("Verification command failed: {}", stderr),
+            message: format!("Failed to run dump_info: {}", stderr),
         }));
     }
 
     let stdout = String::from_utf8_lossy(&output.stdout).trim().to_string();
-    let result: VerificationResult = serde_json::from_str(&stdout).map_err(|e| {
+    let program_info: ProgramInfo = serde_json::from_str(&stdout).map_err(|e| {
         Box::new(VerificationError { message: format!("Failed to parse JSON: {} - {}", e, stdout) })
     })?;
 
-    if result.success {
-        Ok(())
-    } else {
-        Err(Box::new(VerificationError { message: result.message }))
-    }
+    Ok(program_info)
 }

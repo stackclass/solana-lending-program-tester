@@ -19,7 +19,7 @@ use crate::stages::{
 pub fn build() -> Definition {
     Definition {
         executable_name: "your_program.sh".to_string(),
-        legacy_executable_name: Some("your_program.sh".to_string()),
+        legacy_executable_name: None,
         cases: vec![
             Case::new("be1", Arc::new(be1::test_env_setup)),
             Case::new("rs2", Arc::new(rs2::test_rust_basics)),
