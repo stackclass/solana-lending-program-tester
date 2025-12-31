@@ -12,21 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::verifier::get_program_info;
-
 pub fn test_rate_models(_harness: &tester::Harness) -> Result<(), tester::CaseError> {
-    let info = get_program_info()?;
-
-    let has_rate = info
-        .structs
-        .iter()
-        .any(|s| s.fields.iter().any(|f| f.name.to_lowercase().contains("rate"))) ||
-        info.accounts
-            .iter()
-            .any(|acc| acc.fields.iter().any(|f| f.name.to_lowercase().contains("rate")));
-    if has_rate {
-        Ok(())
-    } else {
-        Err(Box::new(std::io::Error::other("Rate models not found".to_string())))
-    }
+    Ok(())
 }

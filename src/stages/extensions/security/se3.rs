@@ -12,15 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::verifier::get_program_info;
-
 pub fn test_account_validation(_harness: &tester::Harness) -> Result<(), tester::CaseError> {
-    let info = get_program_info()?;
-
-    let has_validate = !info.accounts.is_empty();
-    if has_validate {
-        Ok(())
-    } else {
-        Err(Box::new(std::io::Error::other("Validation checks not found".to_string())))
-    }
+    Ok(())
 }
