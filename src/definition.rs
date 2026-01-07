@@ -1,3 +1,23 @@
+// Copyright (c) The StackClass Authors. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+//! Definition module for the lending program tester.
+//!
+//! This module builds the test definition using the tester framework.
+//! The test cases are implemented using the Mollusk test harness for
+//! efficient and accurate Solana program testing.
+
 use std::sync::Arc;
 
 use tester::{Case, Definition};
@@ -16,11 +36,21 @@ use crate::stages::{
     },
 };
 
+/// Build the test definition for the lending program.
+///
+/// This function creates a Definition struct that includes all test cases
+/// for the lending program challenge. The tests are organized into base
+/// stages and extension modules.
+///
+/// # Returns
+///
+/// * `Definition` - The test definition
 pub fn build() -> Definition {
     Definition {
         executable_name: "your_program.sh".to_string(),
         legacy_executable_name: None,
         cases: vec![
+            // Base Stages (7 stages)
             Case::new("be1", Arc::new(be1::test_env_setup)),
             Case::new("rs2", Arc::new(rs2::test_rust_basics)),
             Case::new("sm3", Arc::new(sm3::test_solana_model)),
@@ -28,35 +58,44 @@ pub fn build() -> Definition {
             Case::new("st5", Arc::new(st5::test_spl_token_basics)),
             Case::new("cp6", Arc::new(cp6::test_basic_deposit)),
             Case::new("tt7", Arc::new(tt7::test_basic_withdraw)),
+            // Extension Modules (8 modules × 4 stages = 32 cases)
+            // PDA Module
             Case::new("pa1", Arc::new(pa1::test_pda_concept)),
             Case::new("pa2", Arc::new(pa2::test_pda_derivation)),
             Case::new("pa3", Arc::new(pa3::test_pda_bump_seeds)),
             Case::new("pa4", Arc::new(pa4::test_pda_practice)),
+            // Treasury Module
             Case::new("tr1", Arc::new(tr1::test_treasury_intro)),
             Case::new("tr2", Arc::new(tr2::test_treasury_creation)),
             Case::new("tr3", Arc::new(tr3::test_treasury_security)),
             Case::new("tr4", Arc::new(tr4::test_treasury_practice)),
+            // Account Structure Module
             Case::new("as1", Arc::new(as1::test_bank_account)),
             Case::new("as2", Arc::new(as2::test_user_account)),
             Case::new("as3", Arc::new(as3::test_account_space)),
             Case::new("as4", Arc::new(as4::test_account_practice)),
+            // Lending Core Module
             Case::new("lc1", Arc::new(lc1::test_borrow_basics)),
             Case::new("lc2", Arc::new(lc2::test_repay_basics)),
             Case::new("lc3", Arc::new(lc3::test_ltv_calculation)),
             Case::new("lc4", Arc::new(lc4::test_core_practice)),
+            // Oracle Module
             Case::new("or1", Arc::new(or1::test_oracle_concept)),
             Case::new("or2", Arc::new(or2::test_pyth_integration)),
             Case::new("or3", Arc::new(or3::test_price_fetching)),
             Case::new("or4", Arc::new(or4::test_oracle_practice)),
+            // Liquidation Module
             Case::new("li1", Arc::new(li1::test_health_factor)),
             Case::new("li2", Arc::new(li2::test_liquidation_trigger)),
             Case::new("li3", Arc::new(li3::test_liquidation_process)),
             Case::new("li4", Arc::new(li4::test_liquidation_bonus)),
             Case::new("li5", Arc::new(li5::test_liquidation_practice)),
+            // Interest Module
             Case::new("in1", Arc::new(in1::test_interest_basics)),
             Case::new("in2", Arc::new(in2::test_accrued_interest)),
             Case::new("in3", Arc::new(in3::test_rate_models)),
             Case::new("in4", Arc::new(in4::test_interest_practice)),
+            // Security Module
             Case::new("se1", Arc::new(se1::test_common_vulnerabilities)),
             Case::new("se2", Arc::new(se2::test_reentrancy_protection)),
             Case::new("se3", Arc::new(se3::test_account_validation)),

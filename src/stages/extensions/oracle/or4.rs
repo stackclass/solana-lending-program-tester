@@ -13,5 +13,5 @@
 // limitations under the License.
 
 pub fn test_oracle_practice(_harness: &tester::Harness) -> Result<(), tester::CaseError> {
-    Ok(())
+    crate::helpers::run_oracle_checks()
 }
