@@ -16,7 +16,8 @@
 
 #[allow(dead_code)]
 use crate::mollusk::{
-    ProgramLoadError, TestContextError, init_test_context, load_lending_program_id,
+    ProgramLoadError, TestContextError, init_test_context, load_lending_program,
+    load_lending_program_id,
 };
 use mollusk_svm::{program::keyed_account_for_system_program, result::Check};
 use mollusk_svm_programs_token::{associated_token, token};
@@ -209,8 +210,6 @@ pub fn to_case_error_from_context(error: TestContextError) -> tester::CaseError 
 /// * `Ok(())` - If the program is available
 /// * `Err(tester::CaseError)` - If the program is not available
 pub fn check_program_available(repo_dir: &Path) -> Result<(), tester::CaseError> {
-    use crate::mollusk::load_lending_program;
-
     match load_lending_program(repo_dir) {
         Ok(_) => Ok(()),
         Err(e) => Err(Box::new(e) as Box<dyn std::error::Error + Send + Sync>),
