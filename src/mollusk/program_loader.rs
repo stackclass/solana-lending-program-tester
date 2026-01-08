@@ -149,10 +149,8 @@ pub fn load_lending_program_id(repo_dir: &Path) -> Result<Pubkey, ProgramLoadErr
     }
 
     let content = std::fs::read_to_string(&anchor_path)?;
-    let program_id = find_program_id(&content, "lending")
-        .or_else(|| find_program_id(&content, "lending_program"))
-        .or_else(|| find_first_program_id(&content))
-        .ok_or(ProgramLoadError::ProgramIdNotFound)?;
+    let program_id =
+        find_program_id(&content, "lending-program").ok_or(ProgramLoadError::ProgramIdNotFound)?;
 
     Pubkey::from_str(&program_id).map_err(|_| ProgramLoadError::InvalidProgramId(program_id))
 }
@@ -176,33 +174,6 @@ fn find_program_id(toml: &str, program_name: &str) -> Option<String> {
         if let Some((key, value)) = line.split_once('=') &&
             key.trim() == program_name
         {
-            let value = value.trim().trim_matches('"');
-            if !value.is_empty() {
-                return Some(value.to_string());
-            }
-        }
-    }
-
-    None
-}
-
-fn find_first_program_id(toml: &str) -> Option<String> {
-    let mut in_programs_section = false;
-
-    for raw_line in toml.lines() {
-        let line = raw_line.trim();
-
-        if line.starts_with('[') && line.ends_with(']') {
-            let section = &line[1..line.len() - 1];
-            in_programs_section = section == "programs" || section.starts_with("programs.");
-            continue;
-        }
-
-        if !in_programs_section || line.is_empty() || line.starts_with('#') {
-            continue;
-        }
-
-        if let Some((_key, value)) = line.split_once('=') {
             let value = value.trim().trim_matches('"');
             if !value.is_empty() {
                 return Some(value.to_string());
