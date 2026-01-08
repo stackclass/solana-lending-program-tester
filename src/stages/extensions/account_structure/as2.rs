@@ -13,5 +13,5 @@
 // limitations under the License.
 
 pub fn test_user_account(_harness: &tester::Harness) -> Result<(), tester::CaseError> {
-    Ok(())
+    crate::helpers::run_account_structure_checks()
 }

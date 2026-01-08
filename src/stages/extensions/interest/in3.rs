@@ -13,5 +13,5 @@
 // limitations under the License.
 
 pub fn test_rate_models(_harness: &tester::Harness) -> Result<(), tester::CaseError> {
-    Ok(())
+    crate::helpers::run_interest_checks()
 }
